@@ -626,11 +626,9 @@ public final class PDFGraphics2D extends Graphics2D {
                 this.hints.get(PDFHints.KEY_DRAW_STRING_TYPE))) {
             this.gs.drawString(str, x, y);
         } else {
-            if (str.length() > 0) { // avoid IllegalArgumentException for empty string
-                AttributedString as = new AttributedString(str, 
-                        this.font.getAttributes());
-                drawString(as.getIterator(), x, y);
-            }
+            AttributedString as = new AttributedString(str, 
+                    this.font.getAttributes());
+            drawString(as.getIterator(), x, y);
         }
         
         if (this.clip != null) {
