@@ -2,7 +2,7 @@
  * OrsonPDF : a fast, light-weight PDF library for the Java(tm) platform
  * =====================================================================
  * 
- * (C)opyright 2013-2017, by Object Refinery Limited.  All rights reserved.
+ * (C)opyright 2013-2018, by Object Refinery Limited.  All rights reserved.
  *
  * Project Info:  http://www.object-refinery.com/orsonpdf/index.html
  * 
@@ -436,6 +436,15 @@ public class TestGraphics2D {
         }
     }
     
+    @Test
+    public void checkDrawStringWithEmptyString() {
+        // this should not cause any exception 
+        g2.setRenderingHint(PDFHints.KEY_DRAW_STRING_TYPE, PDFHints.VALUE_DRAW_STRING_TYPE_VECTOR);
+        g2.drawString("", 1, 2);
+        g2.setRenderingHint(PDFHints.KEY_DRAW_STRING_TYPE, null);
+        g2.drawString("", 1, 2);
+    }
+
     /**
      * Some checks for the create() method.
      */
@@ -740,5 +749,12 @@ public class TestGraphics2D {
         Image img = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
         g2.drawImage(img, null, null);
         assertTrue(true); // won't get here if there's an exception above
+    }
+    
+    @Test
+    public void drawImageWithNullImageOp() {
+        BufferedImage img = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
+        g2.drawImage(img, null, 2, 3);
+        assertTrue(true); // won't get here if there's an exception above        
     }
 }
